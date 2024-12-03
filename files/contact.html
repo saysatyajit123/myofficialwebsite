@@ -51,7 +51,7 @@
             <p class="text-gray-700 text-white">Custom-built websites that are fast, responsive, and visually appealing.</p>
         </div>
         <div>
-            <form class="bg-white shadow-md rounded-lg p-6">
+            <form id="myForm" class="bg-white shadow-md rounded-lg p-6">
                 <div class="mb-4">
                 <label for="name" class="block text-gray-700 font-medium">Name</label>
                 <input type="text" id="name" class="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" required>
@@ -73,7 +73,43 @@
             </form>
         </div>
       </div>
+      <script>
+         const form = document.getElementById('myForm');
+
+          form.addEventListener('submit', (e) => {
+          e.preventDefault();
       
+          const formData = {
+              name: form.name.value,
+              email: form.email.value,
+              password: form.phone.value
+          };
+      
+          try {
+              // const response = await fetch('https://script.google.com/macros/s/AKfycbytYnOc0GMIpNS_USPKwxmxPVbzdAQI8oXbdxD5ZvEA_Gg3k8gGz39bQUlgVoOt-pr6Yw/exec', {
+              const response = fetch('https://script.google.com/macros/s/AKfycbytYnOc0GMIpNS_USPKwxmxPVbzdAQI8oXbdxD5ZvEA_Gg3k8gGz39bQUlgVoOt-pr6Yw/exec', {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formData)
+              });
+      
+              if (response) {
+                  alert("Successfully Form submitted");
+                  // window.location.reload();
+                  form.reset();
+              } else {
+                  alert('Failed to submit data. Please try again later.');
+              }
+          } catch (error) {
+              alert('An error occurred: ' + error.message);
+              console.error(error);
+          }
+          });
+      
+        </script>
     </div>
   </section>
 
